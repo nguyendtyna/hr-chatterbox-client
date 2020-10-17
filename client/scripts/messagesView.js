@@ -5,19 +5,25 @@ var MessagesView = {
   initialize: function () {
   },
 
-  renderMessage: function (message) {
-    //expect($('#chats').children().length).to.equal(1);
-    //children() does this: Get the children of each element in the set of matched elements, optionally filtered by a selector
-    //we want to add the message to be a child of $('#chats')
-    console.log(MessagesView.$chats);
-    MessagesView.$chats.append(message);
-    console.log(MessagesView.$chats);
-    console.log(MessagesView);
+  render: function () {
+    // Render all messages
+
+    // iterate through data.results array
+    for (var i = 0; i < Messages._data.results.length; i++) {
+      if (Messages._data.results[i].username  && Messages._data.results[i].text && Messages._data.results[i].roomname) {
+        this.renderMessage(Messages._data.results[i])
+      };
+    }
+
   },
 
+  renderMessage: function (message) {
+    // Render a single message
 
-
-
+    let renderedMessage = MessageView.render(message);
+    // console.log('rendered message:', renderedMessage);
+    MessagesView.$chats.append(renderedMessage);
+  },
 };
 
 
@@ -31,7 +37,7 @@ api.jquery.com/append example:
   <div class="inner">Goodbye</div>
 </div>
 
-$( ".inner" ).append( "<p>Test</p>" ); ==> to create contnet and insert it to desired element
+$( ".inner" ).append( "<p>Test</p>" ); ==> to create content and insert it to desired element
 
 TODO:
 - we want to create a message
