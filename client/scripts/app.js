@@ -21,6 +21,11 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
+      console.log(data.results); // array of objects
+
+      // TODO: Use the data to update Message and re-render the corresponding view
+      Messages._data = data;
+      MessagesView.render(Messages._data);
 
       callback();
     });
